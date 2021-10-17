@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Container, Header, Image, Grid, TextArea, Form, Button, Input } from 'semantic-ui-react';
+import { Container, Header, Grid, TextArea, Form, Button } from 'semantic-ui-react';
 import { capture } from './utils';
 import { Renderer } from './Renderer';
 import './App.css';
