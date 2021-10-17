@@ -35,7 +35,6 @@ const templates = [
 
 function App() {
   const [config, setConfig] = useState(null);
-
   const selectTemplate = (id) => setConfig({ ...templates.find(t => t.id === id) });
 
   return (
