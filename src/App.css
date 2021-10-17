@@ -8,3 +8,12 @@ body {
   padding: 1em;
   border-radius: 3px;
 }
+
+form.ui.form textarea {
+  border: 1px solid #fff;
+  cursor: pointer;
+}
+
+form.ui.form textarea:focus, form.ui.form textarea:hover {
+  border: 1px solid darkslateblue;
+}
