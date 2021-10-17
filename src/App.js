@@ -1,14 +1,9 @@
 import React, { useState } from 'react';
-import { Container, Header, Grid, TextArea, Form, Button } from 'semantic-ui-react';
+import { Container, Header, Grid, Button, Icon } from 'semantic-ui-react';
 import { capture } from './utils';
 import { Renderer } from './Renderer';
+import { Editor } from './Slate';
 import './App.css';
-
-const CustomText = (props) => (
-  <Form>
-    <TextArea {...props} rows={1} />
-  </Form>
-)
 
 const templates = [
   {
@@ -17,16 +12,36 @@ const templates = [
     cols: [
       [
         {
-          "name": "fullName",
-          "component": CustomText,
-          "value": "John Doe"
+          "name": "editor1",
+          "component": Editor,
+          "defaultValue": [
+            {
+              type: 'paragraph',
+              children: [{ text: 'A line of text in a paragraph.' }],
+            },
+          ]
         },
       ],
       [
         {
-          "name": "tArea1",
-          "component": CustomText,
-          "placeholder": "John dfsdf"
+          "name": "editor2",
+          "component": Editor,
+          "defaultValue": [
+            {
+              type: 'paragraph',
+              children: [{ text: 'A line of text in a asfasf.' }],
+            },
+          ]
+        },
+        {
+          "name": "editor3",
+          "component": Editor,
+          "defaultValue": [
+            {
+              type: 'paragraph',
+              children: [{ text: 'Thrid One' }],
+            },
+          ]
         },
       ]
     ]
@@ -36,6 +51,22 @@ const templates = [
 function App() {
   const [config, setConfig] = useState(null);
   const selectTemplate = (id) => setConfig({ ...templates.find(t => t.id === id) });
+  const addItem = (id) => {
+    const template = { ...config };
+
+    template.cols[1].push({
+      "name": "editor4",
+      "component": Editor,
+      "defaultValue": [
+        {
+          type: 'paragraph',
+          children: [{ text: 'Just added' }],
+        },
+      ]
+    });
+
+    setConfig(template);
+  };
 
   return (
     <>
@@ -53,6 +84,13 @@ function App() {
               </Grid.Column>
               <Grid.Column width={12}>
                 <Renderer config={config.cols[1]} />
+              </Grid.Column>
+            </Grid.Row>
+            <Grid.Row>
+              <Grid.Column textAlign="center">
+                <Button icon onClick={() => addItem(1)}>
+                  <Icon name='plus' />
+                </Button>
               </Grid.Column>
             </Grid.Row>
           </Grid>
