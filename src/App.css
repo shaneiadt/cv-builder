@@ -3,9 +3,9 @@ body {
 }
 
 .container {
-  margin-top: 2em;
+  margin-top: 20px;
   background-color: #fff;
-  padding: 1em;
+  padding: 15px;
   border-radius: 3px;
 }
 
