@@ -29,6 +29,7 @@ export const Renderer = ({ config }) => {
       return (
         <Fragment key={props.name}>
           <Component {...props} />
+          <br/>
         </Fragment>
       );
     })
