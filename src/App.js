@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Container, Header, Grid, Button, Icon, Image, Reveal } from 'semantic-ui-react';
+import { lorem } from 'faker';
 import { capture } from './utils';
 import { Renderer } from './Renderer';
-import { Editor } from './Slate';
+import { CustomEditor } from './Slate';
 import './App.css';
 
 const templates = [
@@ -13,15 +14,15 @@ const templates = [
       [
         {
           "name": "editor1",
-          "component": Editor,
+          "component": CustomEditor,
           "defaultValue": [
             {
-              "type": 'title',
-              "children": [{ text: 'Title' }],
+              "type": 'heading-two',
+              "children": [{ text: 'Heading' }],
             },
             {
               type: 'paragraph',
-              children: [{ text: 'A line of text in a paragraph.' }],
+              children: [{ text: lorem.sentences(2) }],
             },
           ]
         },
@@ -29,19 +30,15 @@ const templates = [
       [
         {
           "name": "editor2",
-          "component": Editor,
+          "component": CustomEditor,
           "defaultValue": [
             {
-              "type": 'title',
+              "type": 'heading-two',
               "children": [{ text: 'Heading' }],
             },
             {
               type: 'paragraph',
-              children: [{ text: 'A line of text in a asfasf.' }],
-            },
-            {
-              type: 'paragraph',
-              children: [{ text: 'Third One' }],
+              children: [{ text: lorem.sentences(6) }],
             },
           ]
         },
@@ -50,17 +47,57 @@ const templates = [
   }
 ];
 
+const SectionToolbar = () => (
+  <div>
+    <Button.Group>
+      <Button icon>
+        <Icon name='align left' />
+      </Button>
+      <Button icon>
+        <Icon name='align center' />
+      </Button>
+      <Button icon>
+        <Icon name='align right' />
+      </Button>
+      <Button icon>
+        <Icon name='align justify' />
+      </Button>
+    </Button.Group>{' '}
+    <Button.Group>
+      <Button icon>
+        <Icon name='bold' />
+      </Button>
+      <Button icon>
+        <Icon name='underline' />
+      </Button>
+      <Button icon>
+        <Icon name='text width' />
+      </Button>
+    </Button.Group>
+  </div>
+)
+
 function App() {
   const [config, setConfig] = useState(templates[0]);
   const selectTemplate = (id) => setConfig({ ...templates.find(t => t.id === id) });
-  const addItem = (id) => {
+  const addItem = (colIndex) => {
     const template = { ...config };
 
-    template.cols[1][0]["defaultValue"].push(
+    template.cols[colIndex].push(
       {
-        type: 'paragraph',
-        children: [{ text: 'Just added' }],
-      }
+        "name": "editor2kasjhdkajsd",
+        "component": CustomEditor,
+        "defaultValue": [
+          {
+            "type": 'heading-two',
+            "children": [{ text: 'Heading' }],
+          },
+          {
+            type: 'paragraph',
+            children: [{ text: lorem.sentences(2) }],
+          },
+        ]
+      },
     );
 
     setConfig(template);
@@ -70,12 +107,7 @@ function App() {
     <>
       <Container className="resume">
         {config ?
-          <Grid divided>
-            <Grid.Row>
-              <Grid.Column>
-                <Renderer config={[{ "name": "h1", "component": Editor, "defaultValue": [{ type: "h1", children: [{ text: "My Resume" }] }] }]} />
-              </Grid.Column>
-            </Grid.Row>
+          <Grid>
             <Grid.Row columns={2}>
               <Grid.Column width={4}>
                 <Reveal animated='small fade'>
@@ -86,16 +118,26 @@ function App() {
                     <Image src='https://react.semantic-ui.com/images/wireframe/square-image.png' size='small' circular />
                   </Reveal.Content>
                 </Reveal>
-                <br />
+              </Grid.Column>
+              <Grid.Column>
+                <Renderer config={[{
+                  "name": "h1", "component": CustomEditor, "defaultValue": [{ type: "heading-one", children: [{ text: "My Resume" }] }, {
+                    type: 'paragraph',
+                    children: [{ text: lorem.sentences(2) }],
+                  },]
+                }]} />
+              </Grid.Column>
+            </Grid.Row>
+            <Grid.Row columns={2} divided>
+              <Grid.Column width={4}>
                 <Renderer config={config.cols[0]} />
+                <Button fluid icon onClick={() => addItem(0)}>
+                  <Icon name='plus' />
+                </Button>
               </Grid.Column>
               <Grid.Column width={12}>
                 <Renderer config={config.cols[1]} />
-              </Grid.Column>
-            </Grid.Row>
-            <Grid.Row>
-              <Grid.Column textAlign="center">
-                <Button icon onClick={() => addItem(1)}>
+                <Button fluid icon onClick={() => addItem(1)}>
                   <Icon name='plus' />
                 </Button>
               </Grid.Column>
