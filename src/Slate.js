@@ -2,9 +2,10 @@
 import React, { useMemo, useState, useCallback } from 'react'
 import { createEditor } from 'slate'
 import { Slate, Editable, withReact } from 'slate-react'
+import { withHistory } from 'slate-history'
 
 export const Editor = ({ defaultValue }) => {
-    const editor = useMemo(() => withReact(createEditor()), [])
+    const editor = useMemo(() => withHistory(withReact(createEditor())), [])
     const renderElement = useCallback(props => <Element {...props} />, [])
     const [value, setValue] = useState(defaultValue)
 
