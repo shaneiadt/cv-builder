@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Container, Header, Grid, Button, Icon } from 'semantic-ui-react';
+import { Container, Header, Grid, Button, Icon, Image, Reveal } from 'semantic-ui-react';
 import { capture } from './utils';
 import { Renderer } from './Renderer';
 import { Editor } from './Slate';
@@ -16,6 +16,10 @@ const templates = [
           "component": Editor,
           "defaultValue": [
             {
+              "type": 'title',
+              "children": [{ text: 'Title' }],
+            },
+            {
               type: 'paragraph',
               children: [{ text: 'A line of text in a paragraph.' }],
             },
@@ -28,18 +32,16 @@ const templates = [
           "component": Editor,
           "defaultValue": [
             {
+              "type": 'title',
+              "children": [{ text: 'Heading' }],
+            },
+            {
               type: 'paragraph',
               children: [{ text: 'A line of text in a asfasf.' }],
             },
-          ]
-        },
-        {
-          "name": "editor3",
-          "component": Editor,
-          "defaultValue": [
             {
               type: 'paragraph',
-              children: [{ text: 'Thrid One' }],
+              children: [{ text: 'Third One' }],
             },
           ]
         },
@@ -49,21 +51,17 @@ const templates = [
 ];
 
 function App() {
-  const [config, setConfig] = useState(null);
+  const [config, setConfig] = useState(templates[0]);
   const selectTemplate = (id) => setConfig({ ...templates.find(t => t.id === id) });
   const addItem = (id) => {
     const template = { ...config };
 
-    template.cols[1].push({
-      "name": "editor4",
-      "component": Editor,
-      "defaultValue": [
-        {
-          type: 'paragraph',
-          children: [{ text: 'Just added' }],
-        },
-      ]
-    });
+    template.cols[1][0]["defaultValue"].push(
+      {
+        type: 'paragraph',
+        children: [{ text: 'Just added' }],
+      }
+    );
 
     setConfig(template);
   };
@@ -72,14 +70,23 @@ function App() {
     <>
       <Container className="resume">
         {config ?
-          <Grid>
+          <Grid divided>
             <Grid.Row>
               <Grid.Column>
-                <Header as="h1">My Resume</Header>
+                <Renderer config={[{ "name": "h1", "component": Editor, "defaultValue": [{ type: "h1", children: [{ text: "My Resume" }] }] }]} />
               </Grid.Column>
             </Grid.Row>
             <Grid.Row columns={2}>
               <Grid.Column width={4}>
+                <Reveal animated='small fade'>
+                  <Reveal.Content visible>
+                    <Image src='./avatar.jpg' size='small' circular />
+                  </Reveal.Content>
+                  <Reveal.Content hidden>
+                    <Image src='https://react.semantic-ui.com/images/wireframe/square-image.png' size='small' circular />
+                  </Reveal.Content>
+                </Reveal>
+                <br />
                 <Renderer config={config.cols[0]} />
               </Grid.Column>
               <Grid.Column width={12}>
