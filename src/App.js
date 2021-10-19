@@ -110,7 +110,7 @@ function App() {
           <Grid>
             <Grid.Row columns={2}>
               <Grid.Column width={4}>
-                <Reveal animated='medium fade'>
+                <Reveal animated='small fade'>
                   <Reveal.Content visible>
                     <Image src='./avatar.jpg' size='medium' circular />
                   </Reveal.Content>
@@ -131,7 +131,7 @@ function App() {
             <Grid.Row columns={2} divided>
               <Grid.Column width={4}>
                 <Renderer config={config.cols[0]} />
-                <Button fluid icon onClick={() => addItem(0)}>
+                <Button visible={false} fluid icon onClick={() => addItem(0)}>
                   <Icon name='plus' />
                 </Button>
               </Grid.Column>
