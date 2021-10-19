@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Container, Header, Grid, Button, Icon, Image, Reveal } from 'semantic-ui-react';
+import { Container, Header, Grid, Button, Icon, Image } from 'semantic-ui-react';
 import { lorem } from 'faker';
 import { capture } from './utils';
 import { Renderer } from './Renderer';
@@ -80,6 +80,7 @@ const templates = [
 function App() {
   const [config, setConfig] = useState(templates[0]);
   const selectTemplate = (id) => setConfig({ ...templates.find(t => t.id === id) });
+  const [showEditButton, setShowEditButton] = useState(false);
   const addItem = (colIndex) => {
     const template = { ...config };
 
@@ -103,6 +104,15 @@ function App() {
     setConfig(template);
   };
 
+  const onChangeAvatar = () => {
+    const url = window.prompt("Enter new avatar URL");
+
+    if (!url) return;
+
+    // TODO: Valid image URL
+    console.log({ url });
+  }
+
   return (
     <>
       <Container className="resume">
@@ -110,14 +120,7 @@ function App() {
           <Grid>
             <Grid.Row columns={2}>
               <Grid.Column width={4}>
-                <Reveal animated='small fade'>
-                  <Reveal.Content visible>
-                    <Image src='./avatar.jpg' size='medium' circular />
-                  </Reveal.Content>
-                  <Reveal.Content hidden>
-                    <Image src='https://react.semantic-ui.com/images/wireframe/square-image.png' size='medium' circular />
-                  </Reveal.Content>
-                </Reveal>
+                <Image style={{ cursor: 'pointer' }} src='./avatar.jpg' size='medium' circular onClick={onChangeAvatar} />
               </Grid.Column>
               <Grid.Column width={12}>
                 <Renderer config={[{
@@ -131,15 +134,23 @@ function App() {
             <Grid.Row columns={2} divided>
               <Grid.Column width={4}>
                 <Renderer config={config.cols[0]} />
-                <Button visible={false} fluid icon onClick={() => addItem(0)}>
-                  <Icon name='plus' />
-                </Button>
+                <div style={{ padding: '20px 0' }} onMouseEnter={() => setShowEditButton(true)} onMouseLeave={() => setShowEditButton(false)}>
+                  {showEditButton &&
+                    <Button fluid icon onClick={() => addItem(0)}>
+                      <Icon name='plus' />
+                    </Button>
+                  }
+                </div>
               </Grid.Column>
               <Grid.Column width={12}>
                 <Renderer config={config.cols[1]} />
-                <Button fluid icon onClick={() => addItem(1)}>
-                  <Icon name='plus' />
-                </Button>
+                <div style={{ padding: '20px 0' }} onMouseEnter={() => setShowEditButton(true)} onMouseLeave={() => setShowEditButton(false)}>
+                  {showEditButton &&
+                    <Button fluid icon onClick={() => addItem(1)}>
+                      <Icon name='plus' />
+                    </Button>
+                  }
+                </div>
               </Grid.Column>
             </Grid.Row>
           </Grid>
