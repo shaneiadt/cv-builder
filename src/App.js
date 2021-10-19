@@ -110,20 +110,20 @@ function App() {
           <Grid>
             <Grid.Row columns={2}>
               <Grid.Column width={4}>
-                <Reveal animated='small fade'>
+                <Reveal animated='medium fade'>
                   <Reveal.Content visible>
-                    <Image src='./avatar.jpg' size='small' circular />
+                    <Image src='./avatar.jpg' size='medium' circular />
                   </Reveal.Content>
                   <Reveal.Content hidden>
-                    <Image src='https://react.semantic-ui.com/images/wireframe/square-image.png' size='small' circular />
+                    <Image src='https://react.semantic-ui.com/images/wireframe/square-image.png' size='medium' circular />
                   </Reveal.Content>
                 </Reveal>
               </Grid.Column>
-              <Grid.Column>
+              <Grid.Column width={12}>
                 <Renderer config={[{
                   "name": "h1", "component": CustomEditor, "defaultValue": [{ type: "heading-one", children: [{ text: "My Resume" }] }, {
                     type: 'paragraph',
-                    children: [{ text: lorem.sentences(2) }],
+                    children: [{ text: lorem.sentences(4) }],
                   },]
                 }]} />
               </Grid.Column>
