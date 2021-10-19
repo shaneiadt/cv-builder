@@ -120,7 +120,7 @@ function App() {
           <Grid>
             <Grid.Row columns={2}>
               <Grid.Column width={4}>
-                <Image style={{ cursor: 'pointer' }} src='./avatar.jpg' size='medium' circular onClick={onChangeAvatar} />
+                <Image style={{ cursor: 'pointer' }} src='https://via.placeholder.com/1000.png?text=Click+to+add+avatar' size='medium' circular onClick={onChangeAvatar} />
               </Grid.Column>
               <Grid.Column width={12}>
                 <Renderer config={[{
