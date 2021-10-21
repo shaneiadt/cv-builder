@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Container, Grid, Button, Image } from 'semantic-ui-react';
+import { Image } from 'semantic-ui-react';
 import { capture } from './utils';
 import { Editor } from './Editor';
 import col1 from './templates/1';
@@ -30,23 +30,23 @@ function App() {
 
   return (
     <>
-      <Container className="resume">
-        <Grid divided>
-          <Grid.Row columns={2}>
-            <Grid.Column width={4}>
-              <Image style={{ cursor: 'pointer' }} src={avatar} size='medium' circular onClick={onChangeAvatar} />
-              <Editor template={template.cols[0]} />
-            </Grid.Column>
-            <Grid.Column width={12}>
-              <Editor template={template.cols[1]} />
-            </Grid.Column>
-          </Grid.Row>
-        </Grid>
-      </Container>
+      <div className="container">
+        <div className="resume">
+          <div>
+            <Image style={{ cursor: 'pointer' }} src={avatar} size='medium' circular onClick={onChangeAvatar} />
+            <Editor template={template.cols[0]} />
+          </div>
+          <div>
+            <Editor template={template.cols[1]} />
+          </div>
+        </div>
+      </div>
 
-      <Container>
-        <Button onClick={() => capture(".resume")}>Download</Button>
-      </Container>
+      <div className="toolbar">
+        <div>
+          <button onClick={() => capture(".resume")}>Download</button>
+        </div>
+      </div>
     </>
   );
 }
