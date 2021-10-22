@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { Image } from 'semantic-ui-react';
-import { capture } from './utils';
+// import { capture } from './utils';
 import { Editor } from './Editor';
 import col1 from './templates/1';
 import col2 from './templates/2';
 
 import './App.css';
+import { PDF } from './PDF';
 
 const template = {
   cols: [col1, col2]
@@ -42,11 +43,12 @@ function App() {
         </div>
       </div>
 
-      <div className="toolbar">
+      {/* <div className="toolbar">
         <div>
           <button onClick={() => capture(".resume")}>Download</button>
         </div>
-      </div>
+      </div> */}
+      <PDF />
     </>
   );
 }
