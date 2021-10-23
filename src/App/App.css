@@ -20,15 +20,6 @@ body {
     rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
 }
 
-.toolbar {
-  width: 1000px;
-  background-color: #fff;
-  border-radius: 3px; 
-  padding: 20px;
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px,
-    rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
-}
-
 .resume {
   min-height: 1754px;
   width: 1240px;
