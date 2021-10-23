@@ -5,20 +5,22 @@ export default class Editable extends React.Component {
     constructor(props) {
         super(props);
         this.contentEditable = React.createRef();
-        this.state = { html: "<b>Hello <i>World</i></b>" };
+        this.state = { html: props.html ?? "", editable: true };
     };
 
-    handleChange = evt => {
-        this.setState({ html: evt.target.value });
-    };
+    handleChange = evt => this.setState({ html: evt.target.value })
 
     render() {
-        return <ContentEditable
-            innerRef={this.contentEditable}
-            html={this.state.html} // innerHTML of the editable div
-            disabled={false}       // use true to disable editing
-            onChange={this.handleChange} // handle innerHTML change
-            tagName='article' // Use a custom HTML tag (uses a div by default)
-        />
+        return (
+            <>
+                <ContentEditable
+                    innerRef={this.contentEditable}
+                    html={this.state.html}
+                    disabled={!this.state.editable}
+                    onChange={this.handleChange}
+                    tagName='section'
+                />
+            </>
+        )
     };
 };
