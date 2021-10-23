@@ -8,7 +8,10 @@ export default class Editable extends React.Component {
         this.state = { html: props.html ?? "", editable: true };
     };
 
-    handleChange = evt => this.setState({ html: evt.target.value })
+    handleChange = evt => {
+        this.setState({ html: evt.target.value });
+        this.props.onUpdate(evt.target.value);
+    }
 
     render() {
         return (
