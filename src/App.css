@@ -29,15 +29,23 @@ body {
     rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
 }
 
+.resume {
+  min-height: 1754px;
+  width: 1240px;
+}
+
 h1,
 h2 {
   color: lightseagreen;
 }
 
-div[contenteditable="true"] {
+section {
+  border: 1px dashed #fff;
+  padding: 5px;
+}
+
+section[contenteditable="true"]:hover {
   font-family: sans-serif;
-  margin: 50px;
-  min-height: 50px;
   border: 1px dashed #aaa;
   padding: 5px;
 }
