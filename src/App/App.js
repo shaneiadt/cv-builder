@@ -15,9 +15,12 @@ export const ELEMENT_TYPES = {
 };
 
 const template = [
-  [],
   [
-    { html: "<h2>The title</h2>", type: ELEMENT_TYPES.H1 },
+    { html: "<h2>Objectivessss</h2>", type: ELEMENT_TYPES.H1 },
+    { html: "<p>write something...</p>", type: ELEMENT_TYPES.BODY },
+  ],
+  [
+    { html: "<h1>My Resumes</h1>", type: ELEMENT_TYPES.H1 },
     { html: "<p>write something...</p>", type: ELEMENT_TYPES.BODY },
   ]
 ]
@@ -67,7 +70,9 @@ function App() {
           <Grid.Row>
             <Grid.Column width={4}>
               <Image style={{ cursor: 'pointer' }} src={avatar} size='medium' circular onClick={onChangeAvatar} />
-              {/* {state[0].map((html, index) => <Editable key={index} html={html} onUpdate={onUpdate(0, index)} />)} */}
+              {state[0].map(({ html }, index) => {
+                return <Editable key={index} html={html} onUpdate={onUpdate(0, index)} />
+              })}
             </Grid.Column>
             <Grid.Column width={12}>
               {state[1].map(({ html }, index) => {
@@ -83,7 +88,7 @@ function App() {
         {/* <button onClick={() => capture(".resume")}>Download Image</button> */}
         {/* <button onClick={addEditable}>ADD</button>
         <button onClick={() => console.log(state)}>DUMP TO CONSOLE</button> */}
-        <PDF />
+        <PDF content={state} />
       </Container>
     </>
   );
