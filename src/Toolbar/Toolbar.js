@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ELEMENT_TYPES } from '../App/App';
+import { ELEMENT_TYPES } from '../utils/Types';
 import { Button, Icon } from "semantic-ui-react";
 
 import './Toolbar.css';
