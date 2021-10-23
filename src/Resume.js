@@ -1,7 +1,7 @@
 import React from "react";
 import { Page, Text, Document, StyleSheet, Font, View, Image } from '@react-pdf/renderer';
 
-export const Quixote = () => (
+export const Resume = () => (
     <Document>
         <Page size="A4" style={styles.page}>
             <View style={styles.sideBar}>
