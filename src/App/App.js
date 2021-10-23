@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { Container, Grid, Image } from 'semantic-ui-react';
 // import { capture } from './utils';
-import { PDF } from './PDF';
+import { PDF } from '../PDF';
 
 import './App.css';
-import Editable from './Editable/Editable';
-import { Popup } from './Popup/Popup';
+import Editable from '../Editable/Editable';
+import { Popup } from '../Popup/Popup';
 
 function App() {
   const [avatar, setAvatar] = useState('https://via.placeholder.com/1000.png?text=Click+to+add+avatar');
