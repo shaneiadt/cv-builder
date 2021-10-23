@@ -2,17 +2,17 @@ import React from "react";
 import { Page, Text, Document, StyleSheet, Font, View, Image } from '@react-pdf/renderer';
 
 export const Resume = ({ content }) => {
-    console.log(content);
+    console.log('RESUME', content);
 
-    const col2 = content[1].map(({ html }) => {
-        const el = document.createElement('div');
+    // const col2 = content.layout.cols[1].items.map(({ html }) => {
+    //     const el = document.createElement('div');
 
-        el.innerHTML = html;
+    //     el.innerHTML = html;
 
-        return el.textContent;
-    });
+    //     return el.textContent;
+    // });
 
-    console.log({ col2 });
+    // console.log({ col2 });
     return (
         <Document>
             <Page size="A4" style={styles.page}>
@@ -35,7 +35,7 @@ export const Resume = ({ content }) => {
                             Job Title
                         </Text>
                     </View>
-                    {col2.map((content, index) => <Text key={index} style={styles.text}>{content}</Text>)}
+                    {/* {col2.map((content, index) => <Text key={index} style={styles.text}>{content}</Text>)} */}
                     <Text style={styles.title}>
                         Title
                     </Text>
