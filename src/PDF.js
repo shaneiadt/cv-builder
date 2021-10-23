@@ -11,7 +11,7 @@ export const PDF = () => (
         <br/> */}
         <div style={{ textAlign: 'center' }}>
             <PDFDownloadLink document={<Quixote />} fileName={"Resume"}>
-                <button style={{ width: '200px', padding: '10px' }}> Download </button>
+                <button style={{ width: '200px', padding: '10px' }}>Download PDF</button>
             </PDFDownloadLink>
         </div>
     </>

@@ -13,7 +13,6 @@ body {
 }
 
 .container {
-  width: 1000px;
   margin: 20px auto;
   background-color: #fff;
   border-radius: 3px;
@@ -23,25 +22,30 @@ body {
 
 .toolbar {
   width: 1000px;
-  margin: 20px auto;
   background-color: #fff;
-  border-radius: 3px;
+  border-radius: 3px; 
   padding: 20px;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px,
     rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
 }
 
 .resume {
-  display: flex;
-  padding: 30px;
-}
-
-.ql-editor ol,
-.ql-editor ul {
-  padding-left: 0;
+  min-height: 1754px;
+  width: 1240px;
 }
 
 h1,
 h2 {
   color: lightseagreen;
+}
+
+section {
+  border: 1px dashed #fff;
+  padding: 5px;
+}
+
+section[contenteditable="true"]:hover {
+  font-family: sans-serif;
+  border: 1px dashed #aaa;
+  padding: 5px;
 }

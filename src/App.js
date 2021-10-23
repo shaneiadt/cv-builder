@@ -1,22 +1,15 @@
 import React, { useState } from 'react';
-import { Image } from 'semantic-ui-react';
+import { Container, Grid, Image } from 'semantic-ui-react';
 // import { capture } from './utils';
-import { Editor } from './Editor';
-import col1 from './templates/1';
-import col2 from './templates/2';
-
-import './App.css';
 import { PDF } from './PDF';
 
-const template = {
-  cols: [col1, col2]
-};
+import './App.css';
+import Editable from './Editable/Editable';
+import { Popup } from './Popup/Popup';
 
 function App() {
-  // const [config, setConfig] = useState(templates[0]);
-  // const selectTemplate = (id) => setConfig({ ...templates.find(t => t.id === id) });
-  // const [showEditButton, setShowEditButton] = useState(false);
   const [avatar, setAvatar] = useState('https://via.placeholder.com/1000.png?text=Click+to+add+avatar');
+  const [message, setMessage] = useState("");
 
   const onChangeAvatar = () => {
     const url = window.prompt("Enter new avatar URL");
@@ -29,26 +22,29 @@ function App() {
     setAvatar(url);
   }
 
+  const onPopupComplete = () => setMessage("");
+
   return (
     <>
-      <div className="container">
-        <div className="resume">
-          <div>
-            <Image style={{ cursor: 'pointer' }} src={avatar} size='medium' circular onClick={onChangeAvatar} />
-            <Editor template={template.cols[0]} />
-          </div>
-          <div>
-            <Editor template={template.cols[1]} />
-          </div>
-        </div>
-      </div>
+      <Popup message={message} onPopupComplete={onPopupComplete} />
+      <Container>
+        <Grid className="resume" divided columns={2} padded='horizontally'>
+          <Grid.Row>
+            <Grid.Column width={4}>
+              <Image style={{ cursor: 'pointer' }} src={avatar} size='medium' circular onClick={onChangeAvatar} />
+            </Grid.Column>
+            <Grid.Column width={12}>
+              <Editable html="<h2>The title</h2>" />
+              <Editable html="<p>The title</p>" />
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
+      </Container>
 
-      {/* <div className="toolbar">
-        <div>
-          <button onClick={() => capture(".resume")}>Download</button>
-        </div>
-      </div> */}
-      <PDF />
+      <Container className="toolbar">
+        {/* <button onClick={() => capture(".resume")}>Download Image</button> */}
+        <PDF />
+      </Container>
     </>
   );
 }
