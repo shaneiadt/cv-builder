@@ -1,100 +1,114 @@
 import React from "react";
 import { Page, Text, Document, StyleSheet, Font, View, Image } from '@react-pdf/renderer';
 
-export const Resume = () => (
-    <Document>
-        <Page size="A4" style={styles.page}>
-            <View style={styles.sideBar}>
-                <Image src="./avatar.jpg" style={styles.avatar} />
-                <Text style={styles.title}>
-                    Objectives
-                </Text>
-                <Text style={styles.text}>
-                    Hechas, pues, estas prevenciones, no quiso aguardar más tiempo a poner
-                    en efeto su pensamiento.
-                </Text>
-            </View>
-            <View style={styles.main}>
-                <View style={{ height: 125, display: 'flex', alignContent: 'center', justifyContent: 'center', marginBottom: 20 }}>
-                    <Text style={styles.header}>
-                        Your Resume
+export const Resume = ({ content }) => {
+    console.log(content);
+
+    const col2 = content[1].map(({ html }) => {
+        const el = document.createElement('div');
+
+        el.innerHTML = html;
+
+        return el.textContent;
+    });
+
+    console.log({ col2 });
+    return (
+        <Document>
+            <Page size="A4" style={styles.page}>
+                <View style={styles.sideBar}>
+                    <Image src="./avatar.jpg" style={styles.avatar} />
+                    <Text style={styles.title}>
+                        Objectives
                     </Text>
-                    <Text style={styles.subheading}>
-                        Job Title
+                    <Text style={styles.text}>
+                        Hechas, pues, estas prevenciones, no quiso aguardar más tiempo a poner
+                        en efeto su pensamiento.
                     </Text>
                 </View>
-                <Text style={styles.title}>
-                    Title
-                </Text>
-                <Text style={styles.subheading}>
-                    Company - Date
-                </Text>
-                <Text style={styles.text}>
-                    Hechas, pues, estas prevenciones, no quiso aguardar más tiempo a poner
-                    en efeto su pensamiento, apretándole a ello la falta que él pensaba que
-                    hacía en el mundo su tardanza, según eran los agravios que pensaba
-                    deshacer, tuertos que enderezar.
-                </Text>
-                <Text style={styles.title}>
-                    Title
-                </Text>
-                <Text style={styles.subheading}>
-                    Company - Date
-                </Text>
-                <Text style={styles.text}>
-                    Hechas, pues, estas prevenciones, no quiso aguardar más tiempo a poner
-                    en efeto su pensamiento, apretándole a ello la falta que él pensaba que
-                    hacía en el mundo su tardanza, según eran los agravios que pensaba
-                    deshacer, tuertos que enderezar.
-                </Text>
-                <Text style={styles.title}>
-                    Title
-                </Text>
-                <Text style={styles.subheading}>
-                    Company - Date
-                </Text>
-                <Text style={styles.text}>
-                    Hechas, pues, estas prevenciones, no quiso aguardar más tiempo a poner
-                    en efeto su pensamiento, apretándole a ello la falta que él pensaba que
-                    hacía en el mundo su tardanza, según eran los agravios que pensaba
-                    deshacer, tuertos que enderezar.
-                </Text>
-                <Text style={styles.title}>
-                    Title
-                </Text>
-                <Text style={styles.subheading}>
-                    Company - Date
-                </Text>
-                <Text style={styles.text}>
-                    Hechas, pues, estas prevenciones, no quiso aguardar más tiempo a poner
-                    en efeto su pensamiento, apretándole a ello la falta que él pensaba que
-                    hacía en el mundo su tardanza, según eran los agravios que pensaba
-                    deshacer, tuertos que enderezar.
-                </Text>
-                <Text style={styles.title}>
-                    Title
-                </Text>
-                <Text style={styles.subheading}>
-                    Company - Date
-                </Text>
-                <Text style={styles.text}>
-                    Hechas, pues, estas prevenciones, no quiso aguardar más tiempo a poner
-                    en efeto su pensamiento, apretándole a ello la falta que él pensaba que
-                    hacía en el mundo su tardanza, según eran los agravios que pensaba
-                    deshacer, tuertos que enderezar.
-                </Text>
-                <Text style={styles.title}>
-                    Education
-                </Text>
-                <Text style={styles.h2}>Degree Multimedia Computing</Text>
-                <Text style={styles.subheading}>IADT - (2002 - 2008)</Text>
+                <View style={styles.main}>
+                    <View style={{ height: 125, display: 'flex', alignContent: 'center', justifyContent: 'center', marginBottom: 20 }}>
+                        <Text style={styles.header}>
+                            Your Resume
+                        </Text>
+                        <Text style={styles.subheading}>
+                            Job Title
+                        </Text>
+                    </View>
+                    {col2.map((content, index) => <Text key={index} style={styles.text}>{content}</Text>)}
+                    <Text style={styles.title}>
+                        Title
+                    </Text>
+                    <Text style={styles.subheading}>
+                        Company - Date
+                    </Text>
+                    <Text style={styles.text}>
+                        Hechas, pues, estas prevenciones, no quiso aguardar más tiempo a poner
+                        en efeto su pensamiento, apretándole a ello la falta que él pensaba que
+                        hacía en el mundo su tardanza, según eran los agravios que pensaba
+                        deshacer, tuertos que enderezar.
+                    </Text>
+                    <Text style={styles.title}>
+                        Title
+                    </Text>
+                    <Text style={styles.subheading}>
+                        Company - Date
+                    </Text>
+                    <Text style={styles.text}>
+                        Hechas, pues, estas prevenciones, no quiso aguardar más tiempo a poner
+                        en efeto su pensamiento, apretándole a ello la falta que él pensaba que
+                        hacía en el mundo su tardanza, según eran los agravios que pensaba
+                        deshacer, tuertos que enderezar.
+                    </Text>
+                    <Text style={styles.title}>
+                        Title
+                    </Text>
+                    <Text style={styles.subheading}>
+                        Company - Date
+                    </Text>
+                    <Text style={styles.text}>
+                        Hechas, pues, estas prevenciones, no quiso aguardar más tiempo a poner
+                        en efeto su pensamiento, apretándole a ello la falta que él pensaba que
+                        hacía en el mundo su tardanza, según eran los agravios que pensaba
+                        deshacer, tuertos que enderezar.
+                    </Text>
+                    <Text style={styles.title}>
+                        Title
+                    </Text>
+                    <Text style={styles.subheading}>
+                        Company - Date
+                    </Text>
+                    <Text style={styles.text}>
+                        Hechas, pues, estas prevenciones, no quiso aguardar más tiempo a poner
+                        en efeto su pensamiento, apretándole a ello la falta que él pensaba que
+                        hacía en el mundo su tardanza, según eran los agravios que pensaba
+                        deshacer, tuertos que enderezar.
+                    </Text>
+                    <Text style={styles.title}>
+                        Title
+                    </Text>
+                    <Text style={styles.subheading}>
+                        Company - Date
+                    </Text>
+                    <Text style={styles.text}>
+                        Hechas, pues, estas prevenciones, no quiso aguardar más tiempo a poner
+                        en efeto su pensamiento, apretándole a ello la falta que él pensaba que
+                        hacía en el mundo su tardanza, según eran los agravios que pensaba
+                        deshacer, tuertos que enderezar.
+                    </Text>
+                    <Text style={styles.title}>
+                        Education
+                    </Text>
+                    <Text style={styles.h2}>Degree Multimedia Computing</Text>
+                    <Text style={styles.subheading}>IADT - (2002 - 2008)</Text>
 
-                <Text style={styles.h2}>Degree Multimedia Computing</Text>
-                <Text style={styles.subheading}>IADT - (2002 - 2008)</Text>
-            </View>
-        </Page>
-    </Document>
-);
+                    <Text style={styles.h2}>Degree Multimedia Computing</Text>
+                    <Text style={styles.subheading}>IADT - (2002 - 2008)</Text>
+                </View>
+            </Page>
+        </Document>
+    );
+}
 
 Font.register({
     family: 'OpenSans',
