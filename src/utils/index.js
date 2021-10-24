@@ -10,3 +10,11 @@ export const capture = (selector) => {
         a.click();
     });
 }
+
+export const stringToHTML = (str) => {
+    // const text = `<p>Some text</p><br /><a href="https://daily-dev-tips.com/">My website</a><hr /><a href="https://google.com">Another link</a>`;
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(str, 'text/html');
+
+    console.log(doc.body.children);
+}

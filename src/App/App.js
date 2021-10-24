@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Grid, Image } from 'semantic-ui-react';
-import { capture } from '../utils';
+// import { capture } from '../utils';
 import { PDF } from '../PDF';
 import { getTemplates } from '../templates';
 
@@ -10,6 +10,8 @@ import { Popup } from '../Popup/Popup';
 import { Toolbar } from '../Toolbar/Toolbar';
 // import CustomAvatar from '../Avatar/Avatar';
 import { ELEMENT_TYPES } from '../utils/Types';
+
+// stringToHTML('<image src="./avatar.jpg" /><h2>Objectivessss</h2><p>writing something over there bros...</p>');
 
 function App() {
   // const [avatar, setAvatar] = useState('https://via.placeholder.com/1000.png?text=Click+to+add+avatar');
@@ -58,7 +60,7 @@ function App() {
                       {column.items.map((item, itemIndex) => {
                         switch (item.type) {
                           case ELEMENT_TYPES.IMAGE:
-                            return <Image style={{ cursor: 'pointer' }} src={item.content} size='medium' circular />;
+                            return <Image key={`${columnIndex}-${itemIndex}`} style={{ cursor: 'pointer' }} src={item.content} size='medium' circular />;
                           default:
                             return <Editable key={`${columnIndex}-${itemIndex}`} html={item.content} onUpdate={onUpdate(columnIndex, itemIndex)} />
                         }
@@ -72,7 +74,7 @@ function App() {
           </Container>
 
           <Container style={{ padding: '20px' }}>
-            <button onClick={() => capture(".resume")}>Download Image</button>
+            {/* <button onClick={() => capture(".resume")}>Download Image</button> */}
             {/* <button onClick={addEditable}>ADD</button>
         <button onClick={() => console.log(state)}>DUMP TO CONSOLE</button> */}
             <PDF content={state} />
