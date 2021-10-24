@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Grid } from 'semantic-ui-react';
+import { Container, Grid, Image } from 'semantic-ui-react';
+import { capture } from '../utils';
 import { PDF } from '../PDF';
 import { getTemplates } from '../templates';
 
@@ -7,9 +8,11 @@ import './App.css';
 import Editable from '../Editable/Editable';
 import { Popup } from '../Popup/Popup';
 import { Toolbar } from '../Toolbar/Toolbar';
+// import CustomAvatar from '../Avatar/Avatar';
+import { ELEMENT_TYPES } from '../utils/Types';
 
 function App() {
-  const [avatar, setAvatar] = useState('https://via.placeholder.com/1000.png?text=Click+to+add+avatar');
+  // const [avatar, setAvatar] = useState('https://via.placeholder.com/1000.png?text=Click+to+add+avatar');
   const [message, setMessage] = useState("");
   const [state, setState] = useState(null);
 
@@ -17,23 +20,12 @@ function App() {
     setState(getTemplates()[0]);
   }, []);
 
-  const onChangeAvatar = () => {
-    const url = window.prompt("Enter new avatar URL");
-
-    if (!url) return;
-
-    // TODO: Valid image URL
-    console.log({ url });
-
-    setAvatar(url);
-  }
-
   const onPopupComplete = () => setMessage("");
 
-  const addEditable = (column) => (html, type) => {
+  const addEditable = (column) => (content, type) => {
     const newState = { ...state };
 
-    newState.layout.cols[column].items.push({ html, type });
+    newState.layout.cols[column].items.push({ content, type });
 
     setState(newState);
   }
@@ -60,9 +52,16 @@ function App() {
                 {state.layout.cols.map((column, columnIndex) => {
                   return (
                     <Grid.Column key={`${columnIndex}`} width={column.width}>
-                      {/* <Image style={{ cursor: 'pointer' }} src={avatar} size='medium' circular onClick={onChangeAvatar} /> */}
+                      {/* {columnIndex === 0 &&
+                        <CustomAvatar />
+                      } */}
                       {column.items.map((item, itemIndex) => {
-                        return <Editable key={`${columnIndex}-${itemIndex}`} html={item.html} onUpdate={onUpdate(columnIndex, itemIndex)} />
+                        switch (item.type) {
+                          case ELEMENT_TYPES.IMAGE:
+                            return <Image style={{ cursor: 'pointer' }} src={item.content} size='medium' circular />;
+                          default:
+                            return <Editable key={`${columnIndex}-${itemIndex}`} html={item.content} onUpdate={onUpdate(columnIndex, itemIndex)} />
+                        }
                       })}
                       <Toolbar addEditable={addEditable(columnIndex)} />
                     </Grid.Column>
@@ -73,7 +72,7 @@ function App() {
           </Container>
 
           <Container style={{ padding: '20px' }}>
-            {/* <button onClick={() => capture(".resume")}>Download Image</button> */}
+            <button onClick={() => capture(".resume")}>Download Image</button>
             {/* <button onClick={addEditable}>ADD</button>
         <button onClick={() => console.log(state)}>DUMP TO CONSOLE</button> */}
             <PDF content={state} />
