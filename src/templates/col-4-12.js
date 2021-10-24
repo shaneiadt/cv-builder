@@ -7,15 +7,16 @@ export const one = {
             {
                 width: 4,
                 items: [
-                    { html: "<h2>Objectivessss</h2>", type: ELEMENT_TYPES.H1 },
-                    { html: "<p>write something...</p>", type: ELEMENT_TYPES.BODY }
+                    { content: "./avatar.jpg", type: ELEMENT_TYPES.IMAGE },
+                    { content: "<h2>Objectivessss</h2>", type: ELEMENT_TYPES.H1 },
+                    { content: "<p>write something...</p>", type: ELEMENT_TYPES.BODY }
                 ]
             },
             {
                 width: 12,
                 items: [
-                    { html: "<h1>My Resumes</h1>", type: ELEMENT_TYPES.H1 },
-                    { html: "<p>write something...</p>", type: ELEMENT_TYPES.BODY }
+                    { content: "<h1>My Resumes</h1>", type: ELEMENT_TYPES.H1 },
+                    { content: "<p>write something...</p>", type: ELEMENT_TYPES.BODY }
                 ]
             }
         ]
