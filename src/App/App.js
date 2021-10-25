@@ -54,9 +54,7 @@ function App() {
                 {state.layout.cols.map((column, columnIndex) => {
                   return (
                     <Grid.Column key={`${columnIndex}`} width={column.width}>
-                      {/* {columnIndex === 0 &&
-                        <CustomAvatar />
-                      } */}
+                      {/* {columnIndex === 0 && <CustomAvatar />} */}
                       {column.items.map((item, itemIndex) => {
                         switch (item.type) {
                           case ELEMENT_TYPES.IMAGE:
