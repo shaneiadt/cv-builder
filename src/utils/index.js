@@ -12,9 +12,16 @@ export const capture = (selector) => {
 }
 
 export const stringToHTML = (str) => {
-    // const text = `<p>Some text</p><br /><a href="https://daily-dev-tips.com/">My website</a><hr /><a href="https://google.com">Another link</a>`;
     const parser = new DOMParser();
     const doc = parser.parseFromString(str, 'text/html');
 
-    console.log(doc.body.children);
+    buildTree(doc.body);
+}
+
+export const buildTree = (child) => {
+    for (const c of child.children) {
+        console.log(c.localName);
+
+        if(c.children.length > 0) return buildTree(c);
+    }
 }
