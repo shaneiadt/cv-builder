@@ -15,13 +15,26 @@ export const stringToHTML = (str) => {
     const parser = new DOMParser();
     const doc = parser.parseFromString(str, 'text/html');
 
-    buildTree(doc.body);
+    const map = mapDOMElement(doc.body);
+
+    console.log(map);
 }
 
-export const buildTree = (child) => {
-    for (const c of child.children) {
-        console.log(c.localName);
+const getAttributes = (attributes) => {
+    return attributes.map(attribute => ({
+        att: attribute.name,
+        value: attribute.value
+    }));
+};
 
-        if(c.children.length > 0) return buildTree(c);
-    }
-}
+const mapDOMElement = (element) => {
+    return [...element.childNodes].map(node => {
+        return {
+            content: node.childNodes && node.childNodes.length > 0 ? null : node.textContent,
+            atts: node.nodeType !== 1 ? [] : getAttributes([...node.attributes]),
+            type: node.nodeType === 3 ? 'text' : (node.nodeType === 8 ? 'comment' : node.tagName.toLowerCase()),
+            node: node,
+            children: mapDOMElement(node)
+        };
+    });
+};

@@ -10,8 +10,9 @@ import { Popup } from '../Popup/Popup';
 import { Toolbar } from '../Toolbar/Toolbar';
 // import CustomAvatar from '../Avatar/Avatar';
 import { ELEMENT_TYPES } from '../utils/Types';
+import { stringToHTML } from '../utils';
 
-// stringToHTML('<image src="./avatar.jpg" /><h2>Objectivessss</h2><p>writing something over there bros...</p>');
+stringToHTML('<image src="./avatar.jpg" /><h2>Object<span>ivess</span>ss</h2><p><strong>wr<span>it</span>ing</strong> something over there bros...</p><div><h3>HEADING 3</h3><br/><div>DO <strong>IT</strong></div></div>');
 
 function App() {
   // const [avatar, setAvatar] = useState('https://via.placeholder.com/1000.png?text=Click+to+add+avatar');
