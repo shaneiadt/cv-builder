@@ -1,30 +1,24 @@
 import React from "react";
 import { Page, Text, Document, StyleSheet, Font, View, Image } from '@react-pdf/renderer';
+import { stringToHTML } from "./utils";
+import { ELEMENT_TYPES } from "./utils/Types";
 
 export const Resume = ({ state }) => {
-    console.log('RESUME', state);
 
-    // const col2 = content.layout.cols[1].items.map(({ html }) => {
-    //     const el = document.createElement('div');
+    const html0 = stringToHTML(state.layout.cols[0].items.find(item => item.type === ELEMENT_TYPES.TEXT).content).map(element => {
+        return <Text style={styles.text}>{element.children[0].content}</Text>;
+    });
 
-    //     el.innerHTML = html;
+    const html1 = stringToHTML(state.layout.cols[1].items.find(item => item.type === ELEMENT_TYPES.TEXT).content).map(element => {
+        return <Text style={styles.text}>{element.children[0].content}</Text>;
+    });
 
-    //     return el.textContent;
-    // });
-
-    // console.log({ col2 });
     return (
         <Document>
             <Page size="A4" style={styles.page}>
                 <View style={styles.sideBar}>
                     <Image src="./avatar.jpg" style={styles.avatar} />
-                    <Text style={styles.title}>
-                        Objectives
-                    </Text>
-                    <Text style={styles.text}>
-                        Hechas, pues, estas prevenciones, no quiso aguardar más tiempo a poner
-                        en efeto su pensamiento.
-                    </Text>
+                    {html0}
                 </View>
                 <View style={styles.main}>
                     <View style={{ height: 125, display: 'flex', alignContent: 'center', justifyContent: 'center', marginBottom: 20 }}>
@@ -35,7 +29,7 @@ export const Resume = ({ state }) => {
                             Job Title
                         </Text>
                     </View>
-                    {/* {col2.map((content, index) => <Text key={index} style={styles.text}>{content}</Text>)} */}
+                    {html1}
                     <Text style={styles.title}>
                         Title
                     </Text>
