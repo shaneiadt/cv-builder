@@ -15,9 +15,7 @@ export const stringToHTML = (str) => {
     const parser = new DOMParser();
     const doc = parser.parseFromString(str, 'text/html');
 
-    const map = mapDOMElement(doc.body);
-
-    console.log(map);
+    return mapDOMElement(doc.body);
 }
 
 const getAttributes = (attributes) => {
