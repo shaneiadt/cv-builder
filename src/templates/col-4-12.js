@@ -8,15 +8,13 @@ export const one = {
                 width: 4,
                 items: [
                     { content: "./avatar.jpg", type: ELEMENT_TYPES.IMAGE },
-                    { content: "<h2>Objectivessss</h2>", type: ELEMENT_TYPES.H1 },
-                    { content: "<p>write something...</p>", type: ELEMENT_TYPES.BODY }
+                    { content: "<h2>Objectivessss</h2><p>write something...</p>", type: ELEMENT_TYPES.TEXT },
                 ]
             },
             {
                 width: 12,
                 items: [
-                    { content: "<h1>My Resumes</h1>", type: ELEMENT_TYPES.H1 },
-                    { content: "<p>write something...</p>", type: ELEMENT_TYPES.BODY }
+                    { content: "<h1>My Resumes</h1>", type: ELEMENT_TYPES.TEXT },
                 ]
             }
         ]
