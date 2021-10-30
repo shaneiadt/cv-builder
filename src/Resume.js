@@ -1,8 +1,8 @@
 import React from "react";
 import { Page, Text, Document, StyleSheet, Font, View, Image } from '@react-pdf/renderer';
 
-export const Resume = ({ content }) => {
-    console.log('RESUME', content);
+export const Resume = ({ state }) => {
+    console.log('RESUME', state);
 
     // const col2 = content.layout.cols[1].items.map(({ html }) => {
     //     const el = document.createElement('div');
