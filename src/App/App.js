@@ -7,12 +7,11 @@ import { getTemplates } from '../templates';
 import './App.css';
 import Editable from '../Editable/Editable';
 import { Popup } from '../Popup/Popup';
-import { Toolbar } from '../Toolbar/Toolbar';
 // import CustomAvatar from '../Avatar/Avatar';
 import { ELEMENT_TYPES } from '../utils/Types';
-import { stringToHTML } from '../utils';
+// import { stringToHTML } from '../utils';
 
-stringToHTML('<image src="./avatar.jpg" /><h2>Object<span>ivess</span>ss</h2><p><strong>wr<span>it</span>ing</strong> something over there bros...</p><div><h3>HEADING 3</h3><br/><div>DO <strong>IT</strong></div></div>');
+// stringToHTML('<image src="./avatar.jpg" /><h2>Object<span>ivess</span>ss</h2><p><strong>wr<span>it</span>ing</strong> something over there bros...</p><div><h3>HEADING 3</h3><br/><div>DO <strong>IT</strong></div></div>');
 
 function App() {
   // const [avatar, setAvatar] = useState('https://via.placeholder.com/1000.png?text=Click+to+add+avatar');
@@ -25,21 +24,13 @@ function App() {
 
   const onPopupComplete = () => setMessage("");
 
-  const addEditable = (column) => (content, type) => {
-    const newState = { ...state };
-
-    newState.layout.cols[column].items.push({ content, type });
-
-    setState(newState);
-  }
-
   const onUpdate = (column, index) => (value) => {
     console.log({ column, index });
     console.log('onUpdate', value);
 
-    const newState = [...state];
+    const newState = {...state};
 
-    newState[column][index] = value;
+    newState.layout.cols[column].items[index].content = value;
 
     setState(newState);
   }
@@ -64,7 +55,6 @@ function App() {
                             return <Editable key={`${columnIndex}-${itemIndex}`} html={item.content} onUpdate={onUpdate(columnIndex, itemIndex)} />
                         }
                       })}
-                      <Toolbar addEditable={addEditable(columnIndex)} />
                     </Grid.Column>
                   )
                 })}
