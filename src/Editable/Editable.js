@@ -1,5 +1,6 @@
 import React from 'react';
 import ContentEditable from 'react-contenteditable';
+import { Toolbar } from '../Toolbar/Toolbar';
 
 export default class Editable extends React.Component {
     constructor(props) {
@@ -13,6 +14,11 @@ export default class Editable extends React.Component {
         this.props.onUpdate(evt.target.value);
     }
 
+    addEditable = (html) => {
+        this.setState({ html: this.state.html + html });
+        this.props.onUpdate(this.state.html + html);
+    }
+
     render() {
         return (
             <>
@@ -23,6 +29,7 @@ export default class Editable extends React.Component {
                     onChange={this.handleChange}
                     tagName='section'
                 />
+                <Toolbar addEditable={this.addEditable} />
             </>
         )
     };
