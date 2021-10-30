@@ -7,7 +7,7 @@ export const one = {
             {
                 width: 4,
                 items: [
-                    { content: "./avatar.jpg", type: ELEMENT_TYPES.IMAGE },
+                    // { content: "./avatar.jpg", type: ELEMENT_TYPES.IMAGE },
                     { content: "<h2>Objectivessss</h2><p>write something...</p>", type: ELEMENT_TYPES.TEXT },
                 ]
             },
