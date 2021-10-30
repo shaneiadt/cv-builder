@@ -5,12 +5,12 @@ import { ELEMENT_TYPES } from "./utils/Types";
 
 export const Resume = ({ state }) => {
 
-    const html0 = stringToHTML(state.layout.cols[0].items.find(item => item.type === ELEMENT_TYPES.TEXT).content).map(element => {
-        return <Text style={styles.text}>{element.children[0].content}</Text>;
+    const html0 = stringToHTML(state.layout.cols[0].items.find(item => item.type === ELEMENT_TYPES.TEXT).content).map((element, i) => {
+        return <Text key={`col-0-${i}`} style={styles.text}>{element.children[0].content}</Text>;
     });
 
-    const html1 = stringToHTML(state.layout.cols[1].items.find(item => item.type === ELEMENT_TYPES.TEXT).content).map(element => {
-        return <Text style={styles.text}>{element.children[0].content}</Text>;
+    const html1 = stringToHTML(state.layout.cols[1].items.find(item => item.type === ELEMENT_TYPES.TEXT).content).map((element, i) => {
+        return <Text key={`col-0-${i}`} style={styles.text}>{element.children[0].content}</Text>;
     });
 
     return (
