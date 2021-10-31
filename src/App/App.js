@@ -60,11 +60,11 @@ function App() {
 
             <Container style={{ padding: '20px' }}>
               {/* 
-              <PDFViewer width="1000" height="1000">
-                <Quixote />
-              </PDFViewer>
-              <br/>
-            */}
+                <PDFViewer width="1000" height="1000">
+                  <Quixote />
+                </PDFViewer>
+                <br/>
+              */}
               <div style={{ textAlign: 'center' }}>
                 <PDFDownloadLink document={<Resume state={state} />} fileName={"Resume"}>
                   <button style={{ width: '200px', padding: '10px' }}>Download PDF</button>
