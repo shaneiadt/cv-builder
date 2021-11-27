@@ -39,6 +39,11 @@ function App() {
             <Container>
               <Grid className="resume" divided columns={state.layout.cols.length} padded='horizontally'>
                 <Grid.Row>
+                  <Grid.Column width={16}>
+                    hey
+                  </Grid.Column>
+                </Grid.Row>
+                <Grid.Row>
                   {state.layout.cols.map((column, columnIndex) => {
                     return (
                       <Grid.Column key={`${columnIndex}`} width={column.width}>

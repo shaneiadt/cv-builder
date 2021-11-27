@@ -1,24 +1,72 @@
 import React from "react";
 import { Page, Text, Document, StyleSheet, Font, View, Image } from '@react-pdf/renderer';
-import { stringToHTML } from "./utils";
-import { ELEMENT_TYPES } from "./utils/Types";
+// import { stringToHTML } from "./utils";
+// import { ELEMENT_TYPES } from "./utils/Types";
 
-export const Resume = ({ state }) => {
+export const Resume = ({ state: { layout: { cols } } }) => {
+    console.log(cols);
 
-    const html0 = stringToHTML(state.layout.cols[0].items.find(item => item.type === ELEMENT_TYPES.TEXT).content).map((element, i) => {
-        return <Text key={`col-0-${i}`} style={styles.text}>{element.children[0].content}</Text>;
+    const newCols = cols.map((col) => {
+        const items = col.items.map(item => {
+            let tempStr = item.content;
+
+            tempStr = tempStr
+                .replaceAll("<div><br /></div>", "[BREAK]<br />[BREAK]")
+                .replaceAll("div><div", "div>[BREAK]<div")
+                .split("[BREAK]")
+                .filter(t => t.length > 0);
+
+            return {
+                content: tempStr,
+                type: item.type
+            };
+        });
+
+        return {
+            ...col,
+            items
+        };
     });
 
-    const html1 = stringToHTML(state.layout.cols[1].items.find(item => item.type === ELEMENT_TYPES.TEXT).content).map((element, i) => {
-        return <Text key={`col-0-${i}`} style={styles.text}>{element.children[0].content}</Text>;
-    });
+    // items.map(item => {
+    //     let tempStr = item.content;
+
+    //     tempStr = tempStr
+    //         .replaceAll("<div><br /></div>", "[BREAK]<br />[BREAK]")
+    //         .replaceAll("div><div", "div>[BREAK]<div")
+    //         .split("[BREAK]")
+    //         .filter(t => t.length > 0);
+
+    //     return {
+    //         content: tempStr,
+    //         type: item.type
+    //     };
+
+    const html = [];
+
+    // if (newData.length > 0) {
+    // html[0] = newData[0][0].content.map((item, i) => {
+    //     if (item.includes("<h2>")) {
+
+    //     }
+    //     return <Text key={`col-0-${i}`} style={styles.text}>{item}</Text>;
+    // });
+
+    // html[1] = newData[0][0].content.map((item, i) => {
+    //     return <Text key={`col-1-${i}`} style={styles.text}>{item}</Text>;
+    // });
+    // }
+
+    console.log(newCols);
+
+    console.log(html);
 
     return (
         <Document>
             <Page size="A4" style={styles.page}>
                 <View style={styles.sideBar}>
                     <Image src="./avatar.jpg" style={styles.avatar} />
-                    {html0}
+                    {html[0]}
                 </View>
                 <View style={styles.main}>
                     <View style={{ height: 125, display: 'flex', alignContent: 'center', justifyContent: 'center', marginBottom: 20 }}>
@@ -29,7 +77,7 @@ export const Resume = ({ state }) => {
                             Job Title
                         </Text>
                     </View>
-                    {html1}
+                    {html[1]}
                     <Text style={styles.title}>
                         Title
                     </Text>

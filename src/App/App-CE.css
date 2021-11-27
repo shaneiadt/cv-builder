@@ -1,0 +1,35 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+#root {
+  padding: 20px;
+}
+
+body {
+  background-color: lightseagreen;
+}
+
+.container {
+  margin: 20px auto;
+  background-color: #fff;
+  border-radius: 3px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px,
+    rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+}
+
+.resume {
+  min-height: 1754px;
+  width: 1240px;
+}
+
+h1,
+h2 {
+  color: lightseagreen;
+}
+
+[contenteditable] img {
+  display: none;
+}
