@@ -25,18 +25,38 @@ body {
   width: 1240px;
 }
 
-h1,
-h2 {
+h1.ui.header,
+h2.ui.header {
   color: lightseagreen;
 }
 
-section {
-  border: 1px dashed #fff;
-  padding: 5px;
+.block {
+  margin-bottom: 20px;
 }
 
-section[contenteditable="true"]:hover {
-  font-family: sans-serif;
-  border: 1px dashed #aaa;
-  padding: 5px;
+.block .block-label {
+  cursor: pointer;
+  transition: background-color 0.5s;
+}
+
+.block .block-label:hover {
+  background: lightseagreen;
+  color: #fff;
+}
+
+.block-actions {
+  display: none;
+}
+
+.block:hover .block-actions {
+  display: block;
+  float: right;
+}
+
+.blurring.dimmable>.dimmer {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.block-modal {
+  padding: 20px;
 }
