@@ -1,3 +1,5 @@
 import { combineReducers } from "redux";
 
-export default combineReducers({ dummy: () => 'dummy' });
+import templatesReducer from "./templatesReducer";
+
+export default combineReducers({ template: templatesReducer });
