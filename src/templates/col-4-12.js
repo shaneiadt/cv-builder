@@ -1,22 +1,40 @@
-import { ELEMENT_TYPES } from "../utils/Types";
+import { BLOCK_TYPE } from "../utils";
 
-export const one = {
+const template = {
     name: "col-4-12",
     layout: {
         cols: [
             {
                 width: 4,
-                items: [
-                    // { content: "./avatar.jpg", type: ELEMENT_TYPES.IMAGE },
-                    { content: "<h2>Objectivessss</h2><p>write something...</p>", type: ELEMENT_TYPES.TEXT },
+                blocks: [
+                    {
+                        type: BLOCK_TYPE.DEFAULT,
+                        header: "Header",
+                        text: "Aliquam erat volutpat. Aliquam rhoncus ligula sed nisl suscipit faucibus. Phasellus eleifend lorem sed cursus accumsan. Suspendisse condimentum nisi erat, suscipit mollis nisl fringilla at. Maecenas gravida libero non porta laoreet.",
+                    }
                 ]
             },
             {
                 width: 12,
-                items: [
-                    { content: "<h1>My Resumes</h1>", type: ELEMENT_TYPES.TEXT },
+                blocks: [
+                    {
+                        type: BLOCK_TYPE.DEFAULT,
+                        header: "Header",
+                        subheader: "Subheader",
+                        text: "Aliquam erat volutpat. Aliquam rhoncus ligula sed nisl suscipit faucibus. Phasellus eleifend lorem sed cursus accumsan. Suspendisse condimentum nisi erat, suscipit mollis nisl fringilla at. Maecenas gravida libero non porta laoreet.",
+                        labels: ["ReactJs"]
+                    },
+                    {
+                        type: BLOCK_TYPE.DEFAULT,
+                        header: "Header",
+                        subheader: "Subheader",
+                        text: "Aliquam erat volutpat. Aliquam rhoncus ligula sed nisl suscipit faucibus. Phasellus eleifend lorem sed cursus accumsan. Suspendisse condimentum nisi erat, suscipit mollis nisl fringilla at. Maecenas gravida libero non porta laoreet.",
+                        labels: ["HTML", "CSS"]
+                    }
                 ]
             }
         ]
     }
 };
+
+export default template;
