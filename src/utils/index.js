@@ -1,5 +1,7 @@
 import html2canvas from 'html2canvas';
 
+export { BLOCK_TYPE } from './Types';
+
 export const capture = (selector) => {
     html2canvas(document.querySelector(selector)).then(canvas => {
         var a = document.createElement('a');
