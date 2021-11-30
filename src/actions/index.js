@@ -9,3 +9,14 @@ export const loadTemplate = (templateToLoad = template) => {
         payload: templateToLoad
     }
 }
+
+export const updateBlock = (columnIndex, blockIndex, block) => {
+    return {
+        type: ACTIONS.UPDATE_BLOCK,
+        payload: {
+            columnIndex,
+            blockIndex,
+            block
+        }
+    }
+}

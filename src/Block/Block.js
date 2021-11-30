@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
 import { Header, Label, Button, Modal, Form, Input, TextArea } from 'semantic-ui-react';
 
-const Block = ({ header = "", subheader = "", text = "", labels = [], onChange }) => {
+import { updateBlock } from '../actions';
+
+const Block = ({ header = "", subheader = "", text = "", labels = [], columnIndex, blockIndex, updateBlock }) => {
     const [showModal, setShowModal] = useState(false);
     const [content, setContent] = useState({
         header,
@@ -16,7 +19,8 @@ const Block = ({ header = "", subheader = "", text = "", labels = [], onChange }
 
     const handleSubmit = () => {
         setShowModal(false);
-        onChange(content);
+        
+        updateBlock(columnIndex, blockIndex, content);
     }
 
     return (
@@ -93,4 +97,4 @@ const Block = ({ header = "", subheader = "", text = "", labels = [], onChange }
     )
 };
 
-export default Block;
+export default connect(null, { updateBlock })(Block);
