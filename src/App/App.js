@@ -1,59 +1,39 @@
-import React, { useEffect, useState } from 'react';
-import { Container, Grid, Image } from 'semantic-ui-react';
-import { getTemplates } from '../templates';
-import { PDFDownloadLink } from '@react-pdf/renderer';
-import { Resume } from '../Resume';
+import React, { Component } from 'react';
+import { Container, Grid } from 'semantic-ui-react';
 import { Animated } from 'react-animated-css';
+import { connect } from 'react-redux';
+// import { PDFDownloadLink } from '@react-pdf/renderer';
 
+// import { Resume } from '../Resume';
+import { loadTemplate } from '../actions';
+import Block from '../Block/Block';
 import './App.css';
-import Editable from '../Editable/Editable';
-import { Popup } from '../Popup/Popup';
-// import CustomAvatar from '../Avatar/Avatar';
-import { ELEMENT_TYPES } from '../utils/Types';
+import { BLOCK_TYPE } from '../utils';
+import CustomAvatar from '../Avatar/Avatar';
 
-function App() {
-  // const [avatar, setAvatar] = useState('https://via.placeholder.com/1000.png?text=Click+to+add+avatar');
-  const [message, setMessage] = useState("");
-  const [state, setState] = useState(null);
-
-  useEffect(() => {
-    setState(getTemplates()[0]);
-  }, []);
-
-  const onPopupComplete = () => setMessage("");
-
-  const onUpdate = (column, index) => (value) => {
-    const newState = { ...state };
-
-    newState.layout.cols[column].items[index].content = value;
-
-    setState(newState);
+class App extends Component {
+  componentDidMount() {
+    this.props.loadTemplate();
   }
 
-  return (
-    <>
-      <Popup message={message} onPopupComplete={onPopupComplete} />
-      {state &&
-        <>
+  render() {
+    return (
+      <>
+        {this.props.template && (
           <Animated animationIn="fadeIn" animationInDuration={1000} isVisible={true}>
             <Container>
-              <Grid className="resume" divided columns={state.layout.cols.length} padded='horizontally'>
+              <Grid className="resume" divided columns={2} padded='horizontally'>
                 <Grid.Row>
-                  <Grid.Column width={16}>
-                    hey
-                  </Grid.Column>
-                </Grid.Row>
-                <Grid.Row>
-                  {state.layout.cols.map((column, columnIndex) => {
+                  {this.props.template.layout.cols.map((column, columnIndex) => {
                     return (
-                      <Grid.Column key={`${columnIndex}`} width={column.width}>
-                        {/* {columnIndex === 0 && <CustomAvatar />} */}
-                        {column.items.map((item, itemIndex) => {
-                          switch (item.type) {
-                            case ELEMENT_TYPES.IMAGE:
-                              return <Image key={`${columnIndex}-${itemIndex}`} style={{ cursor: 'pointer' }} src={item.content} size='medium' circular />;
+                      <Grid.Column key={`col-${columnIndex}`} width={column.width}>
+                        {column.blocks.map((block, blockIndex) => {
+                          switch (block.type) {
+                            case BLOCK_TYPE.AVATAR:
+                              return <CustomAvatar image={block.image} key={`col-${columnIndex}-block-${blockIndex}`} />
+                            case BLOCK_TYPE.DEFAULT:
                             default:
-                              return <Editable key={`${columnIndex}-${itemIndex}`} html={item.content} onUpdate={onUpdate(columnIndex, itemIndex)} />
+                              return <Block key={`col-${columnIndex}-block-${blockIndex}`} {...block} columnIndex={columnIndex} blockIndex={blockIndex} />;
                           }
                         })}
                       </Grid.Column>
@@ -70,17 +50,25 @@ function App() {
                 </PDFViewer>
                 <br/>
               */}
-              <div style={{ textAlign: 'center' }}>
-                <PDFDownloadLink document={<Resume state={state} />} fileName={"Resume"}>
-                  <button style={{ width: '200px', padding: '10px' }}>Download PDF</button>
-                </PDFDownloadLink>
-              </div>
+              {/* <div style={{ textAlign: 'center' }}>
+              <PDFDownloadLink document={<Resume state={this.state} />} fileName={"Resume"}>
+                <button style={{ width: '200px', padding: '10px' }}>Download PDF</button>
+              </PDFDownloadLink>
+            </div> */}
             </Container>
           </Animated>
-        </>
-      }
-    </>
-  );
+        )}
+      </>
+    );
+  }
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  const { template } = state;
+
+  return {
+    template
+  };
+}
+
+export default connect(mapStateToProps, { loadTemplate })(App);
