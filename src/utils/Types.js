@@ -1,3 +1,4 @@
 export const BLOCK_TYPE = {
-  DEFAULT: "DEFAULT"
+  DEFAULT: "DEFAULT",
+  AVATAR: "AVATAR"
 };
