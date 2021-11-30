@@ -35,7 +35,7 @@ class CustomAvatar extends React.Component {
             <>
                 <Modal
                     closeOnDimmerClick={true}
-                    onClose={() => this.setShowModal(false)}
+                    onClose={this.onCloseDefault}
                     className="block-modal"
                     dimmer="blurring"
                     open={this.state.showModal}>
@@ -46,8 +46,12 @@ class CustomAvatar extends React.Component {
                         onCrop={this.onCropDefault}
                         onClose={this.onCloseDefault}
                     />
-                    <h5>Preview</h5>
-                    <img alt="Avatar Preview" style={{ width: '150px', height: '150px' }} src={this.state.defaultPreview} />
+                    {this.state.defaultPreview && (
+                        <>
+                            <h5>Preview</h5>
+                            <img alt="Avatar Preview" style={{ width: '150px', height: '150px' }} src={this.state.defaultPreview} />
+                        </>
+                    )}
                 </Modal>
                 <div>
                     <img alt="User Avatar" style={{ width: '100%', borderRadius: '100%', cursor: 'pointer' }} src={this.state.src} onClick={this.onAvatarClick} />
