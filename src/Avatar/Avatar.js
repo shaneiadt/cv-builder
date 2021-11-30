@@ -1,15 +1,13 @@
 import React from 'react'
 import Avatar from 'react-avatar-edit';
+import { Modal } from 'semantic-ui-react';
 
-export default class CustomAvatar extends React.Component {
-    constructor(props) {
-        super(props)
-        const src = './avatar.jpg'
-        this.state = {
-            preview: null,
-            defaultPreview: null,
-            src
-        }
+class CustomAvatar extends React.Component {
+    state = {
+        preview: null,
+        defaultPreview: null,
+        src: this.props.image,
+        showModal: false
     }
 
     onCropDefault = (preview) => {
@@ -21,46 +19,42 @@ export default class CustomAvatar extends React.Component {
     }
 
     onCloseDefault = () => {
-        this.setState({ defaultPreview: null })
+        this.setState({ showModal: false, src: this.state.defaultPreview });
     }
 
     onClose = () => {
         this.setState({ preview: null })
     }
 
-    onLoadNewImage = () => {
-        const src = './einshtein2.jpeg'
-        this.setState({ src })
+    onAvatarClick = () => {
+        this.setState({ showModal: true });
     }
 
     render() {
         return (
-            <div className="container-fluid">
-                <div className="row" style={{ marginTop: '45px' }}>
-                    <div className="col-2" />
-                    <div className="col-8">
-                        <h4>Default usage</h4>
-                    </div>
-                    <div className="col-2" />
+            <>
+                <Modal
+                    closeOnDimmerClick={true}
+                    onClose={() => this.setShowModal(false)}
+                    className="block-modal"
+                    dimmer="blurring"
+                    open={this.state.showModal}>
+                    <Avatar
+                        width={390}
+                        height={295}
+                        exportSize={390}
+                        onCrop={this.onCropDefault}
+                        onClose={this.onCloseDefault}
+                    />
+                    <h5>Preview</h5>
+                    <img alt="Avatar Preview" style={{ width: '150px', height: '150px' }} src={this.state.defaultPreview} />
+                </Modal>
+                <div>
+                    <img alt="User Avatar" style={{ width: '100%', borderRadius: '100%', cursor: 'pointer' }} src={this.state.src} onClick={this.onAvatarClick} />
                 </div>
-                <div className="row">
-                    <div className="col-2" />
-                    <div className="col-5">
-                        <Avatar
-                            width={390}
-                            height={295}
-                            exportSize={390}
-                            onCrop={this.onCropDefault}
-                            onClose={this.onCloseDefault}
-                        />
-                    </div>
-                    <div className="col-2">
-                        <h5>Preview</h5>
-                        <img alt="" style={{ width: '150px', height: '150px' }} src={this.state.defaultPreview} />
-                    </div>
-                    <div className="col-3" />
-                </div>
-            </div>
+            </>
         )
     }
 }
+
+export default CustomAvatar;
