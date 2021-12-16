@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import { useDrag } from 'react-dnd';
 import { Header, Label, Button, Modal, Form, Input, TextArea } from 'semantic-ui-react';
 
 import { updateBlock } from '../actions';
+import { BLOCK_TYPE } from '../utils';
+import BlockContainer from './BlockContainer';
 
 const Block = ({ header = "", subheader = "", text = "", labels = [], columnIndex, blockIndex, updateBlock }) => {
     const [showModal, setShowModal] = useState(false);
@@ -12,6 +15,13 @@ const Block = ({ header = "", subheader = "", text = "", labels = [], columnInde
         text,
         labels
     });
+    const [{ isDragging }, drag] = useDrag(() => ({
+        type: BLOCK_TYPE.DEFAULT,
+        item: [columnIndex, blockIndex],
+        collect: monitor => ({
+            isDragging: !!monitor.isDragging(),
+        }),
+    }))
 
     const handleChange = (e, { name, value }) => {
         setContent({ ...content, [name]: name === 'labels' ? value.split(",") : value });
@@ -19,7 +29,7 @@ const Block = ({ header = "", subheader = "", text = "", labels = [], columnInde
 
     const handleSubmit = () => {
         setShowModal(false);
-        
+
         updateBlock(columnIndex, blockIndex, content);
     }
 
@@ -60,39 +70,50 @@ const Block = ({ header = "", subheader = "", text = "", labels = [], columnInde
                     <Button type='submit' primary>Submit</Button>
                 </Form>
             </Modal>
-            <div className="block">
-                <div className="block-actions">
-                    <Button.Group basic size='small'>
-                        <Button onClick={() => setShowModal(true)} icon='pencil' />
-                    </Button.Group>
+            <BlockContainer
+                columnIndex={columnIndex}
+                blockIndex={blockIndex}
+            >
+                <div
+                    className="block"
+                    ref={drag}
+                    style={{
+                        opacity: isDragging ? 0.5 : 1,
+                        cursor: 'move'
+                    }}>
+                    <div className="block-actions">
+                        <Button.Group basic size='small'>
+                            <Button onClick={() => setShowModal(true)} icon='pencil' />
+                        </Button.Group>
+                    </div>
+                    {header && (
+                        <Header as='h2'>
+                            {header}
+                            {
+                                subheader && (
+                                    <Header.Subheader>
+                                        {subheader}
+                                    </Header.Subheader>
+                                )
+                            }
+                        </Header>
+                    )}
+                    {text && (
+                        <p>{text}</p>
+                    )}
+                    {
+                        labels.length > 0 && (
+                            <div>
+                                {labels.map(label => (
+                                    <Label className="block-label" key={label}>
+                                        {label}
+                                    </Label>
+                                ))}
+                            </div>
+                        )
+                    }
                 </div>
-                {header && (
-                    <Header as='h2'>
-                        {header}
-                        {
-                            subheader && (
-                                <Header.Subheader>
-                                    {subheader}
-                                </Header.Subheader>
-                            )
-                        }
-                    </Header>
-                )}
-                {text && (
-                    <p>{text}</p>
-                )}
-                {
-                    labels.length > 0 && (
-                        <div>
-                            {labels.map(label => (
-                                <Label className="block-label" key={label}>
-                                    {label}
-                                </Label>
-                            ))}
-                        </div>
-                    )
-                }
-            </div>
+            </BlockContainer>
         </>
     )
 };

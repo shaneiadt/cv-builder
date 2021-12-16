@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Container, Grid } from 'semantic-ui-react';
 import { Animated } from 'react-animated-css';
 import { connect } from 'react-redux';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
 // import { PDFDownloadLink } from '@react-pdf/renderer';
 
 // import { Resume } from '../Resume';
@@ -26,17 +28,19 @@ class App extends Component {
                 <Grid.Row>
                   {this.props.template.layout.cols.map((column, columnIndex) => {
                     return (
-                      <Grid.Column key={`col-${columnIndex}`} width={column.width}>
-                        {column.blocks.map((block, blockIndex) => {
-                          switch (block.type) {
-                            case BLOCK_TYPE.AVATAR:
-                              return <CustomAvatar image={block.image} key={`col-${columnIndex}-block-${blockIndex}`} />
-                            case BLOCK_TYPE.DEFAULT:
-                            default:
-                              return <Block key={`col-${columnIndex}-block-${blockIndex}`} {...block} columnIndex={columnIndex} blockIndex={blockIndex} />;
-                          }
-                        })}
-                      </Grid.Column>
+                      <DndProvider backend={HTML5Backend}>
+                        <Grid.Column key={`col-${columnIndex}`} width={column.width}>
+                          {column.blocks.map((block, blockIndex) => {
+                            switch (block.type) {
+                              case BLOCK_TYPE.AVATAR:
+                                return <CustomAvatar image={block.image} key={`col-${columnIndex}-block-${blockIndex}`} />
+                              case BLOCK_TYPE.DEFAULT:
+                              default:
+                                return <Block key={`col-${columnIndex}-block-${blockIndex}`} {...block} columnIndex={columnIndex} blockIndex={blockIndex} />;
+                            }
+                          })}
+                        </Grid.Column>
+                      </DndProvider>
                     )
                   })}
                 </Grid.Row>

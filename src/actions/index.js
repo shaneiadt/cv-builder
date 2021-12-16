@@ -20,3 +20,13 @@ export const updateBlock = (columnIndex, blockIndex, block) => {
         }
     }
 }
+
+export const moveBlock = (toPos, fromPos) => {
+    return {
+        type: ACTIONS.MOVE_BLOCK,
+        payload: {
+            fromPos,
+            toPos
+        }
+    }
+}
