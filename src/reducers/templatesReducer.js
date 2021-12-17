@@ -31,6 +31,8 @@ const templatesReducer = (state = INITIAL_STATE, action) => {
 }
 
 const update = (state, payload) => {
+    // TODO: This updating action needs to be more immutable on the reducer state
+
     const { columnIndex, blockIndex, block } = payload;
     const newState = { ...state };
 
