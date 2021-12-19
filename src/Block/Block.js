@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { useDrag } from 'react-dnd';
 import { Header, Label, Button, Modal, Form, Input, TextArea } from 'semantic-ui-react';
@@ -7,9 +7,14 @@ import { updateBlock } from '../actions';
 import { BLOCK_TYPE } from '../utils';
 import BlockContainer from './BlockContainer';
 
-const Block = ({ header = "", subheader = "", text = "", labels = [], columnIndex, blockIndex, updateBlock }) => {
+const Block = ({ id, header = "", subheader = "", text = "", labels = [], columnIndex, blockIndex, updateBlock }) => {
+    useEffect(() => {
+        setContent({ id, header, subheader, text, labels });
+    }, [id, header, subheader, text, labels]);
+
     const [showModal, setShowModal] = useState(false);
     const [content, setContent] = useState({
+        id,
         header,
         subheader,
         text,
@@ -62,7 +67,7 @@ const Block = ({ header = "", subheader = "", text = "", labels = [], columnInde
                     </Form.Field>
                     <Form.Field>
                         <Input
-                            value={content.labels.join(",")}
+                            value={content?.labels?.join(",")}
                             name='labels'
                             onChange={handleChange} />
                     </Form.Field>
