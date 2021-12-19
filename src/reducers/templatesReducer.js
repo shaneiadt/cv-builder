@@ -8,7 +8,7 @@ const templatesReducer = (state = INITIAL_STATE, action) => {
             return { ...action.payload }
         }
         case ACTIONS.UPDATE_BLOCK: {
-            return update(state, action.payload);
+            return updateBlock(state, action.payload);
         }
         case ACTIONS.MOVE_BLOCK: {
             const newState = { ...state };
@@ -19,7 +19,7 @@ const templatesReducer = (state = INITIAL_STATE, action) => {
 
             // const replacedBlock = newState.layout.cols[toPos[0]].blocks.splice(toPos[1], 1, oldBlock);
 
-            const updatedState = update(state, { columnIndex: toPos[0], blockIndex: toPos[1], block });
+            const updatedState = updateBlock(state, { columnIndex: toPos[0], blockIndex: toPos[1], block });
 
             console.log({ updatedState });
 
@@ -30,7 +30,7 @@ const templatesReducer = (state = INITIAL_STATE, action) => {
     }
 }
 
-const update = (state, payload) => {
+const updateBlock = (state, payload) => {
     // TODO: This updating action needs to be more immutable on the reducer state
 
     const { columnIndex, blockIndex, block } = payload;
