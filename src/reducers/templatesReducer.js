@@ -1,3 +1,4 @@
+import { cloneDeep } from "lodash";
 import { ACTIONS } from "../actions/types";
 
 const INITIAL_STATE = null;
@@ -11,19 +12,18 @@ const templatesReducer = (state = INITIAL_STATE, action) => {
             return updateBlock(state, action.payload);
         }
         case ACTIONS.MOVE_BLOCK: {
-            const newState = { ...state };
+            const newState = cloneDeep(state);
             const { fromPos, toPos } = action.payload;
-            console.log(fromPos, toPos);
 
-            const block = { ...newState.layout.cols[fromPos[0]].blocks[fromPos[1]] };
+            const blockA = { ...state.layout.cols[fromPos[0]].blocks[fromPos[1]] };
+            const blockB = { ...state.layout.cols[toPos[0]].blocks[toPos[1]] };
 
-            // const replacedBlock = newState.layout.cols[toPos[0]].blocks.splice(toPos[1], 1, oldBlock);
+            const stateA = updateBlock(newState, { columnIndex: toPos[0], blockIndex: toPos[1], block: blockA });
+            const stateB = updateBlock(stateA, { columnIndex: fromPos[0], blockIndex: fromPos[1], block: blockB });
 
-            const updatedState = updateBlock(state, { columnIndex: toPos[0], blockIndex: toPos[1], block });
+            const newNewState = cloneDeep(stateB);
 
-            console.log({ updatedState });
-
-            return updatedState;
+            return newNewState;
         }
         default:
             return state;
@@ -31,15 +31,10 @@ const templatesReducer = (state = INITIAL_STATE, action) => {
 }
 
 const updateBlock = (state, payload) => {
-    // TODO: This updating action needs to be more immutable on the reducer state
-
     const { columnIndex, blockIndex, block } = payload;
-    const newState = { ...state };
+    const newState = cloneDeep(state);
 
-    newState.layout.cols[columnIndex].blocks[blockIndex] = {
-        ...newState.layout.cols[columnIndex].blocks[blockIndex],
-        ...block
-    };
+    newState.layout.cols[columnIndex].blocks[blockIndex] = { ...block };
 
     return newState;
 }
