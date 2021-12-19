@@ -24,11 +24,11 @@ class App extends Component {
         {this.props.template && (
           <Animated animationIn="fadeIn" animationInDuration={1000} isVisible={true}>
             <Container>
-              <Grid className="resume" divided columns={2} padded='horizontally'>
-                <Grid.Row>
-                  {this.props.template.layout.cols.map((column, columnIndex) => {
-                    return (
-                      <DndProvider backend={HTML5Backend}>
+              <DndProvider backend={HTML5Backend}>
+                <Grid className="resume" divided columns={2} padded='horizontally'>
+                  <Grid.Row>
+                    {this.props.template.layout.cols.map((column, columnIndex) => {
+                      return (
                         <Grid.Column key={`col-${columnIndex}`} width={column.width}>
                           {column.blocks.map((block, blockIndex) => {
                             switch (block.type) {
@@ -40,11 +40,11 @@ class App extends Component {
                             }
                           })}
                         </Grid.Column>
-                      </DndProvider>
-                    )
-                  })}
-                </Grid.Row>
-              </Grid>
+                      )
+                    })}
+                  </Grid.Row>
+                </Grid>
+              </DndProvider>
             </Container>
 
             <Container style={{ padding: '20px' }}>
