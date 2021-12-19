@@ -29,7 +29,14 @@ const Block = ({ id, header = "", subheader = "", text = "", labels = [], column
     }))
 
     const handleChange = (e, { name, value }) => {
-        setContent({ ...content, [name]: name === 'labels' ? value.split(",") : value });
+        if (name === "labels") {
+            const labels = name === "labels" && value === "" ? [] : value.split(",");
+
+            setContent({ ...content, labels });
+        } else {
+            setContent({ ...content, [name]: value });
+        }
+
     };
 
     const handleSubmit = () => {
