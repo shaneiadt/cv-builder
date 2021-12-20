@@ -28,7 +28,7 @@ const Block = ({ id, header = "", subheader = "", text = "", labels = [], column
         }),
     }))
 
-    const handleChange = (e, { name, value }) => {
+    const handleChange = (_, { name, value }) => {
         if (name === "labels") {
             const labels = name === "labels" && value === "" ? [] : value.split(",");
 
