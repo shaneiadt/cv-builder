@@ -12,6 +12,7 @@ import Block from '../Block/Block';
 import './App.css';
 import { BLOCK_TYPE } from '../utils';
 import CustomAvatar from '../Avatar/Avatar';
+import Toolbar from '../Toolbar/Toolbar';
 
 class App extends Component {
   componentDidMount() {
@@ -39,6 +40,7 @@ class App extends Component {
                                 return <Block key={`col-${columnIndex}-block-${blockIndex}`} {...block} columnIndex={columnIndex} blockIndex={blockIndex} />;
                             }
                           })}
+                          <Toolbar columnIndex={columnIndex} />
                         </Grid.Column>
                       )
                     })}
