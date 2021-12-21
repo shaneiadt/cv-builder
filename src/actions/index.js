@@ -30,3 +30,22 @@ export const moveBlock = (toPos, fromPos) => {
         }
     }
 }
+
+export const addBlock = (columnIndex) => {
+    return {
+        type: ACTIONS.ADD_BLOCK,
+        payload: {
+            columnIndex
+        }
+    }
+}
+
+export const removeBlock = (columnIndex, bid) => {
+    return {
+        type: ACTIONS.REMOVE_BLOCK,
+        payload: {
+            columnIndex,
+            bid
+        }
+    }
+}
