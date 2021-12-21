@@ -1,5 +1,6 @@
 import { cloneDeep } from "lodash";
 import { ACTIONS } from "../actions/types";
+import { BLOCK_TYPE } from "../utils";
 
 const INITIAL_STATE = null;
 
@@ -24,6 +25,21 @@ const templatesReducer = (state = INITIAL_STATE, action) => {
             const newNewState = cloneDeep(stateB);
 
             return newNewState;
+        }
+        case ACTIONS.ADD_BLOCK: {
+            const { columnIndex } = action.payload;
+            const newState = cloneDeep(state);
+
+            newState.layout.cols[columnIndex].blocks.push({
+                id: newState.layout.cols[columnIndex].blocks.length,
+                type: BLOCK_TYPE.DEFAULT,
+                header: "New Header",
+                subheader: "New Subheader",
+                text: "Type something here...",
+                labels: []
+            });
+
+            return newState;
         }
         default:
             return state;
