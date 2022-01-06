@@ -35,7 +35,7 @@ const templatesReducer = (state = INITIAL_STATE, action) => {
                 type: BLOCK_TYPE.DEFAULT,
                 header: "New Header",
                 subheader: "New Subheader",
-                text: "Type something here...",
+                text: "Type something here....",
                 labels: []
             });
 
